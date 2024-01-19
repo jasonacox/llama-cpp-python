@@ -72,7 +72,7 @@ class LlamaGrammar:
             )
         if verbose:
             print(f"{cls.from_string.__name__} grammar:", file=sys.stderr)
-            print_grammar(sys.stdout, parsed_grammar)
+            print_grammar(sys.stderr, parsed_grammar)
             print(file=sys.stderr)
         return cls(parsed_grammar)
 
@@ -1433,7 +1433,6 @@ class SchemaConverter:
 
     def visit(self, schema: Dict[str, Any], name: str) -> str:
         schema_type: Optional[str] = schema.get("type") # type: ignore
-        assert isinstance(schema_type, str), f"Unrecognized schema: {schema}"
         rule_name = name or "root"
 
         if "$defs" in schema:
